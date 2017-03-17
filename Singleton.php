@@ -3,7 +3,7 @@
 # 单例模式
 
 class Singleton {
-	private static $Singleton = '';
+	private static $_instance = NULL;
 
 	# 不能通过new来创建对象
 	private function __construct() {
@@ -11,11 +11,11 @@ class Singleton {
 	}
 
 	# 外部统一获取对象入口
-	public static function GetSingleton() {
-		if( is_null(self::$Singleton) || isset(self::$Singleton) ) {
-			self::$Singleton = new self();
+	public static function getInstance() {
+		if( !(self::$_instance instanceof self) ) {
+			self::$_instance = new self();
 		}
-		return self::$Singleton;
+		return self::$_instance;
 	}
 
 	public function dosomething1() {
@@ -27,5 +27,5 @@ class Singleton {
 	}
 }
 
-$singleton = Singleton::GetSingleton();
+$singleton = Singleton::getInstance();
 $singleton->dosomething1();
