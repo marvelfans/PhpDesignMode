@@ -46,12 +46,10 @@ class Factory {
 	public static function createProduct() {
 		$product = NULL;
 		$args = func_get_args();
-		$ClassStr = isset($args[0]) ? $args[0] : NULL;
-		$args_list = count($args > 1) ? array_slice($args, 1) : NULL;
-		echo $ClassStr . "\n";
+		$ClassStr = array_shift($args);
 		try {
 			$class = empty($ClassStr) ? NULL : new ReflectionClass($ClassStr);
-			$product = empty($class) ? NULL : (empty($args_list) ? $class->newInstance() : $class->newInstanceArgs($args_list()));
+			$product = empty($class) ? NULL : $class->newInstanceArgs($args);
 		} catch(Exception $e) {
 			print $e->getMessage();
 		}
@@ -62,7 +60,11 @@ class Factory {
 
 # test
 $product1 = Factory::createProduct("Product1", "phone", "999.9");
-$product2 = Factory::createProduct("Product2");
+// $product2 = Factory::createProduct("Product2");
 
 $product1->method1();
-$product2->method1();
+// $product2->method1();
+
+# 工厂方法创建单例时，需要单独去创建，使用 Reflectionclass 和 newinstanceargs 不能创建单例对象
+
+
