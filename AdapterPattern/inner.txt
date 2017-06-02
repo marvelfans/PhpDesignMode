@@ -1,0 +1,3 @@
+ZhangSan	1001	rd	1002	aaaab	1003
+LiSi	2001	rd	2002	baaab	2003
+WangWu	3001	pm	3002	caaac	3003
